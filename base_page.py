@@ -34,12 +34,20 @@
 #
 # ***** END LICENSE BLOCK *****
 
+from selenium.webdriver.common.by import By
+
 from page import Page
 import login_region
 
 
 class BasePage(Page):
 
+    _page_title_locator = (By.CSS_SELECTOR, "h1.page-title")
+
     @property
     def login_region(self):
         return login_region.LoginRegion(self.testsetup)
+
+    @property
+    def page_title(self):
+        return self.find_element(self._page_title_locator).text

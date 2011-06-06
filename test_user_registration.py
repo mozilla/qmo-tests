@@ -44,6 +44,15 @@ import registration_page
 
 class TestUserRegistration:
 
+    def test_new_user_can_register(self, testsetup):
+        home_pg = home_page.HomePage(testsetup)
+        home_pg.go_to_home_page()
+        home_pg.login_region.click_sign_up()
+
+        registration_pg = registration_page.RegistrationPage(testsetup)
+        registration_pg.register_new_user()
+        Assert.equal(registration_pg.page_title, "Sign Up Complete!")
+
     def test_username_only_allows_lower_case_letters_and_numbers(self, testsetup):
         home_pg = home_page.HomePage(testsetup)
         home_pg.go_to_home_page()
