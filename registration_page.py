@@ -66,7 +66,7 @@ class RegistrationPage(base_page.BasePage):
         self.selenium.find_element(*self._humanity_test_locator).send_keys("nine")
         self.submit_registration()
 
-    def set_username(self, username):
+    def type_username(self, username):
         self.selenium.find_element(*self._username_locator).clear()
         self.selenium.find_element(*self._username_locator).send_keys(username)
 

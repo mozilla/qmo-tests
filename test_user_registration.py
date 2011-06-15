@@ -62,6 +62,6 @@ class TestUserRegistration:
         invalid_characters = range(32, 47) + range(58, 96) + range(123, 127)
         invalid_username = "automatedtest%s" % chr(random.choice(invalid_characters))
         print "invalid_username : %s" % invalid_username
-        registration_pg.set_username(invalid_username)
+        registration_pg.type_username(invalid_username)
         registration_pg.submit_registration()
         Assert.equal(registration_pg.username_error, "Only lowercase letters and numbers allowed")
