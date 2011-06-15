@@ -55,9 +55,6 @@ class Page(object):
         else:
             return True
 
-    def find_element(self, locator):
-        return self.selenium.find_element(locator[0], locator[1])
-
     def record_error(self):
         print "-------------------"
         print "Error at: %s" % self.selenium.current_url

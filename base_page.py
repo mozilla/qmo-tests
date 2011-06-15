@@ -50,4 +50,4 @@ class BasePage(Page):
 
     @property
     def page_title(self):
-        return self.find_element(self._page_title_locator).text
+        return self.selenium.find_element(*self._page_title_locator).text

@@ -59,20 +59,20 @@ class RegistrationPage(base_page.BasePage):
         current_time = str(time.time()).split('.')[0]
         password = "password"
         self.set_username("automatedtest%s" % current_time)
-        self.find_element(self._email_locator).send_keys("automatedtest%s@mailinator.com" % current_time)
-        self.find_element(self._password_locator).send_keys(password)
-        self.find_element(self._confirm_password_locator).send_keys(password)
-        self.find_element(self._display_name_locator).send_keys("Automated Test %s" % current_time)
-        self.find_element(self._humanity_test_locator).send_keys("nine")
+        self.selenium.find_element(*self._email_locator).send_keys("automatedtest%s@mailinator.com" % current_time)
+        self.selenium.find_element(*self._password_locator).send_keys(password)
+        self.selenium.find_element(*self._confirm_password_locator).send_keys(password)
+        self.selenium.find_element(*self._display_name_locator).send_keys("Automated Test %s" % current_time)
+        self.selenium.find_element(*self._humanity_test_locator).send_keys("nine")
         self.submit_registration()
 
     def set_username(self, username):
-        self.find_element(self._username_locator).clear()
-        self.find_element(self._username_locator).send_keys(username)
+        self.selenium.find_element(*self._username_locator).clear()
+        self.selenium.find_element(*self._username_locator).send_keys(username)
 
     @property
     def username_error(self):
-        return self.find_element(self._username_error_locator).text
+        return self.selenium.find_element(*self._username_error_locator).text
 
     def submit_registration(self):
-        self.find_element(self._submit_locator).click()
+        self.selenium.find_element(*self._submit_locator).click()

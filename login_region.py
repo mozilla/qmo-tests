@@ -44,4 +44,4 @@ class LoginRegion(Page):
     _sign_up_link_locator = (By.CSS_SELECTOR, ".signup a")
 
     def click_sign_up(self):
-        self.find_element(self._sign_up_link_locator).click()
+        self.selenium.find_element(*self._sign_up_link_locator).click()
