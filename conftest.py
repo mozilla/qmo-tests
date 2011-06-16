@@ -60,9 +60,9 @@ def pytest_runtest_setup(item):
         TestSetup.skip_selenium = False
         
         try:
-            capabilities = getattr(webdriver.DesiredCapabilities, item.browser_name)
+            capabilities = getattr(webdriver.DesiredCapabilities, item.browser_name.upper())
             capabilities["version"] = item.browser_version
-            capabilities["platform"] = item.platform
+            capabilities["platform"] = item.platform.upper()
             TestSetup.selenium = webdriver.Remote(
                 command_executor = "http://%s:%s/wd/hub" % (item.host, item.port),
                 desired_capabilities = capabilities)
