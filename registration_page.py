@@ -58,7 +58,7 @@ class RegistrationPage(base_page.BasePage):
     def register_new_user(self):
         current_time = str(time.time()).split('.')[0]
         password = "password"
-        self.set_username("automatedtest%s" % current_time)
+        self.type_username("automatedtest%s" % current_time)
         self.selenium.find_element(*self._email_locator).send_keys("automatedtest%s@mailinator.com" % current_time)
         self.selenium.find_element(*self._password_locator).send_keys(password)
         self.selenium.find_element(*self._confirm_password_locator).send_keys(password)
@@ -67,8 +67,9 @@ class RegistrationPage(base_page.BasePage):
         self.submit_registration()
 
     def type_username(self, username):
-        self.selenium.find_element(*self._username_locator).clear()
-        self.selenium.find_element(*self._username_locator).send_keys(username)
+        username_field = self.selenium.find_element(*self._username_locator)
+        username_field.clear()
+        username_field.send_keys(username)
 
     @property
     def username_error(self):
