@@ -63,7 +63,6 @@ class RegistrationPage(base_page.BasePage):
         self.selenium.find_element(*self._password_locator).send_keys(password)
         self.selenium.find_element(*self._confirm_password_locator).send_keys(password)
         self.selenium.find_element(*self._display_name_locator).send_keys("Automated Test %s" % current_time)
-        self.selenium.find_element(*self._humanity_test_locator).send_keys("nine")
         self.submit_registration()
 
     def type_username(self, username):
