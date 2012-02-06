@@ -7,4 +7,3 @@ pytest-mozwebqa==0.7.1
 pytest-xdist==1.6
 rdflib==3.1.0
 selenium
-wsgiref==0.1.2
