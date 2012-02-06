@@ -3,8 +3,8 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import time
-import base64
+from selenium.webdriver.support.ui import WebDriverWait
+from unittestzero import Assert
 
 
 class Page(object):
@@ -16,10 +16,8 @@ class Page(object):
 
     @property
     def is_the_current_page(self):
-        page_title = self.selenium.title
-        if not page_title == self._page_title:
-            print "Expected page title: %s" % self._page_title
-            print "Actual page title: %s" % page_title
-            raise Exception("Expected page title does not match actual page title.")
-        else:
-            return True
+        if self._page_title:
+            WebDriverWait(self.selenium, 10).until(lambda s: self.selenium.title)
+
+        Assert.equal(self.selenium.title, self._page_title)
+        return True
