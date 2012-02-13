@@ -39,11 +39,11 @@ Once this is all set up you will need to download and start a Selenium Grid inst
 
 To run tests locally its a simple case of calling the command below from this directory
 
-    py.test . --browser-name=<BROWSER_NAME> --browser-version=<BROWSER_VERSION> --platform=<PLATFORM>
+    py.test --browsername=<BROWSER_NAME> --browserver=<BROWSER_VERSION> --platform=<PLATFORM> tests
 
 All parameters are required, and depend on the environments provided by your Selenium Grid instance. For example:
 
-    py.test . --browser-name=FIREFOX --browser-version=4.0 --platform=MAC
+    py.test --browsername=FIREFOX --browserver=4.0 --platform=MAC tests
 
 Writing Tests
 -------------
