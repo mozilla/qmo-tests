@@ -7,27 +7,24 @@ import random
 
 from unittestzero import Assert
 
-import home_page
-import registration_page
+from pages.home import HomePage
 
 
 class TestUserRegistration:
 
     def test_new_user_can_register(self, mozwebqa):
-        home_pg = home_page.HomePage(mozwebqa)
+        home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
-        home_pg.login_region.click_sign_up()
+        registration_pg = home_pg.login_region.click_sign_up()
 
-        registration_pg = registration_page.RegistrationPage(mozwebqa)
         registration_pg.register_new_user()
         Assert.equal(registration_pg.page_title, "Sign Up Complete!")
 
     def test_username_only_allows_lower_case_letters_and_numbers(self, mozwebqa):
-        home_pg = home_page.HomePage(mozwebqa)
+        home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
-        home_pg.login_region.click_sign_up()
+        registration_pg = home_pg.login_region.click_sign_up()
 
-        registration_pg = registration_page.RegistrationPage(mozwebqa)
         invalid_characters = range(32, 47) + range(58, 96) + range(123, 127)
         invalid_username = "automatedtest%s" % chr(random.choice(invalid_characters))
         print "invalid_username : %s" % invalid_username

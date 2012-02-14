@@ -6,7 +6,6 @@
 from selenium.webdriver.common.by import By
 
 from page import Page
-import login_region
 
 
 class BasePage(Page):
@@ -15,7 +14,8 @@ class BasePage(Page):
 
     @property
     def login_region(self):
-        return login_region.LoginRegion(self.testsetup)
+        from regions.login import LoginRegion
+        return LoginRegion(self.testsetup)
 
     @property
     def page_title(self):
