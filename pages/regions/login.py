@@ -14,3 +14,5 @@ class LoginRegion(Page):
 
     def click_sign_up(self):
         self.selenium.find_element(*self._sign_up_link_locator).click()
+        from pages.registration import RegistrationPage
+        return RegistrationPage(self.testsetup)

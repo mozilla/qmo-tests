@@ -8,10 +8,10 @@ import time
 from selenium.webdriver.common.by import By
 from unittestzero import Assert
 
-import base_page
+from base import BasePage
 
 
-class RegistrationPage(base_page.BasePage):
+class RegistrationPage(BasePage):
 
     _page_title = u"Create an Account | QMO \u2013 quality.mozilla.org"
 
