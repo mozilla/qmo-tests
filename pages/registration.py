@@ -6,7 +6,6 @@
 import time
 
 from selenium.webdriver.common.by import By
-from unittestzero import Assert
 
 from base import BasePage
 

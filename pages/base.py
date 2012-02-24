@@ -18,5 +18,9 @@ class BasePage(Page):
         return LoginRegion(self.testsetup)
 
     @property
+    def is_logged_in(self):
+        return self.login_region.is_logout_visible
+
+    @property
     def page_title(self):
         return self.selenium.find_element(*self._page_title_locator).text
