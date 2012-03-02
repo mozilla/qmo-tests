@@ -12,10 +12,10 @@ from page import Page
 class LoginRegion(Page):
 
     _sign_up_link_locator = (By.CSS_SELECTOR, '.signup a')
-    _login_username_field_locator  = (By.ID, 'log')
-    _login_password_field_locator  = (By.ID, 'pwd')
-    _login_submit_button_locator  = (By.CSS_SELECTOR, '.login .submit button')
-    _logout_link_locator  = (By.CSS_SELECTOR, '.howdy .user-logout a')
+    _login_username_field_locator = (By.ID, 'log')
+    _login_password_field_locator = (By.ID, 'pwd')
+    _login_submit_button_locator = (By.CSS_SELECTOR, '.login .submit button')
+    _logout_link_locator = (By.CSS_SELECTOR, '.howdy .user-logout a')
 
     @property
     def is_logout_visible(self):

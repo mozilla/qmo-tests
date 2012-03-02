@@ -16,7 +16,6 @@ class TestLoginLogout:
         home_pg.login_region.login()
         Assert.true(home_pg.is_logged_in)
 
-
     def test_logout(self, mozwebqa):
         home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
