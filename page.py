@@ -22,3 +22,9 @@ class Page(object):
 
         Assert.equal(self.selenium.title, self._page_title)
         return True
+
+    def is_element_visible(self, locator):
+        try:
+            return self.selenium.find_element(*locator).is_displayed()
+        except:
+            return False

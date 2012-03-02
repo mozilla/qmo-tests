@@ -4,7 +4,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
 
 from page import Page
 
@@ -19,10 +18,7 @@ class LoginRegion(Page):
 
     @property
     def is_logout_visible(self):
-        try:
-            return self.selenium.find_element(*self._logout_link_locator).text == 'Log Out'
-        except NoSuchElementException:
-            return False
+        return self.is_element_visible(self._logout_link_locator)
 
     def click_sign_up(self):
         self.selenium.find_element(*self._sign_up_link_locator).click()
