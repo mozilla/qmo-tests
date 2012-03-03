@@ -22,4 +22,4 @@ class TestLoginLogout:
         home_pg.login_region.login()
         Assert.true(home_pg.is_logged_in)
         home_pg.login_region.logout()
-        Assert.true(not home_pg.is_logged_in)
+        Assert.false(home_pg.is_logged_in)
