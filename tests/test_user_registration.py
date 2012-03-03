@@ -10,12 +10,10 @@ from unittestzero import Assert
 
 from pages.home import HomePage
 
-xfail = pytest.mark.xfail
-
 
 class TestUserRegistration:
 
-    @xfail(reason="There is a capcha on the registration page")
+    @pytest.mark.xfail(reason="There is a capcha on the registration page")
     def test_new_user_can_register(self, mozwebqa):
         home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
