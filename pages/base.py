@@ -10,6 +10,10 @@ from page import Page
 class BasePage(Page):
 
     _page_title_locator = (By.CSS_SELECTOR, "h1.page-title")
+    
+    @property
+    def is_logged_in(self):
+        return self.login_region.is_logout_visible
 
     @property
     def login_region(self):
