@@ -12,7 +12,7 @@ from page import Page
 class BasePage(Page):
 
     _page_title_locator = (By.CSS_SELECTOR, "h1.page-title")
-    
+
     @property
     def is_logged_in(self):
         return self.login_region.is_logout_visible
@@ -30,4 +30,3 @@ class BasePage(Page):
     def header_region(self):
         from regions.header import HeaderRegion
         return HeaderRegion(self.testsetup)
-        
