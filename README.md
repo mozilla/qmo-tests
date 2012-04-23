@@ -7,7 +7,7 @@ Running Tests
 -------------
 
 ### Python
-Before you will be able to run these tests you will need to have Python 2.6 installed.
+Before you will be able to run these tests, you will need to have Python 2.6 installed.
 
 Run
 
@@ -19,7 +19,7 @@ followed by
 
 __note__
 
-If you are running on Ubuntu/Debian you will need to do following first
+If you are running on Ubuntu/Debian, you will need to do following first:
 
     sudo apt-get install python-setuptools
     
@@ -27,16 +27,16 @@ to install the required Python libraries.
 
 ### Running tests locally
 
-To run tests locally its a simple case of calling the command below from this directory
+To run tests locally, it's a simple case of calling the command below from this directory
 
     py.test --driver=firefox
 
-For more command line options see https://github.com/davehunt/pytest-mozwebqa
+For more command line options, see https://github.com/davehunt/pytest-mozwebqa
 
 Writing Tests
 -------------
 
-If you want to get involved and add more tests then there's just a few things
+If you want to get involved and add more tests, there are just a few things
 we'd like to ask you to do:
 
 1. Use the [template files][GitHub Templates] for all new tests and page objects
