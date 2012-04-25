@@ -1,0 +1,43 @@
+
+.. _`contact channels`:
+.. _`contact`:
+
+Contact channels
+===================================
+
+- `new issue tracker`_ to report bugs or suggest features (for version
+  2.0 and above).  You may also peek at the `old issue tracker`_ but please
+  don't submit bugs there anymore.
+
+- `Testing In Python`_: a mailing list for Python testing tools and discussion.
+
+- `py-dev developers list`_ pytest specific announcements and discussions.
+
+- #pylib on irc.freenode.net IRC channel for random questions.
+
+- private mail to Holger.Krekel at gmail com if you want to communicate sensitive issues
+
+- `commit mailing list`_
+
+- `merlinux.eu`_ offers on-site teaching and consulting services.
+
+.. _`new issue tracker`: http://bitbucket.org/hpk42/pytest/issues/
+.. _`old issue tracker`: http://bitbucket.org/hpk42/py-trunk/issues/
+
+.. _`merlinux.eu`: http://merlinux.eu
+
+.. _`get an account`:
+
+.. _tetamap: http://tetamap.wordpress.com
+
+.. _`@pylibcommit`: http://twitter.com/pylibcommit
+
+
+.. _`Testing in Python`: http://lists.idyll.org/listinfo/testing-in-python
+.. _FOAF: http://en.wikipedia.org/wiki/FOAF
+.. _`py-dev`:
+.. _`development mailing list`:
+.. _`py-dev developers list`: http://codespeak.net/mailman/listinfo/py-dev
+.. _`py-svn`:
+.. _`commit mailing list`: http://codespeak.net/mailman/listinfo/py-svn
+

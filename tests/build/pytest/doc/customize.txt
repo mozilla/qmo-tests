@@ -1,0 +1,123 @@
+Basic test configuration
+===================================
+
+Command line options and configuration file settings
+-----------------------------------------------------------------
+
+You can get help on command line options and values in INI-style
+configurations files by using the general help option::
+
+    py.test -h   # prints options _and_ config file settings
+
+This will display command line and configuration file settings
+which were registered by installed plugins.
+
+How test configuration is read from configuration INI-files
+-------------------------------------------------------------
+
+py.test searches for the first matching ini-style configuration file
+in the directories of command line argument and the directories above.
+It looks for file basenames in this order::
+
+    pytest.ini
+    tox.ini
+    setup.cfg
+
+Searching stops when the first ``[pytest]`` section is found.
+There is no merging of configuration values from multiple files.  Example::
+
+    py.test path/to/testdir
+
+will look in the following dirs for a config file::
+
+    path/to/testdir/pytest.ini
+    path/to/testdir/tox.ini
+    path/to/testdir/setup.cfg
+    path/to/pytest.ini
+    path/to/tox.ini
+    path/to/setup.cfg
+    ... # up until root of filesystem
+
+If argument is provided to a py.test run, the current working directory
+is used to start the search.
+
+.. _`how to change command line options defaults`:
+.. _`adding default options`:
+
+How to change command line options defaults
+------------------------------------------------
+
+It can be tedious to type the same series of command line options
+every time you use py.test .  For example, if you always want to see
+detailed info on skipped and xfailed tests, as well as have terser "dot"
+progress output, you can write it into a configuration file::
+
+    # content of pytest.ini
+    # (or tox.ini or setup.cfg)
+    [pytest]
+    addopts = -rsxX -q
+
+From now on, running ``py.test`` will add the specified options.
+
+Builtin configuration file options
+----------------------------------------------
+
+.. confval:: minversion
+
+   Specifies a minimal pytest version required for running tests.
+
+        minversion = 2.1  # will fail if we run with pytest-2.0
+
+.. confval:: addopts
+
+   Add the specified ``OPTS`` to the set of command line arguments as if they
+   had been specified by the user. Example: if you have this ini file content::
+
+       [pytest]
+       addopts = --maxfail=2 -rf  # exit after 2 failures, report fail info
+
+   issuing ``py.test test_hello.py`` actually means::
+
+       py.test --maxfail=2 -rf test_hello.py
+
+   Default is to add no options.
+
+.. confval:: norecursedirs
+
+   Set the directory basename patterns to avoid when recursing
+   for test discovery.  The individual (fnmatch-style) patterns are
+   applied to the basename of a directory to decide if to recurse into it.
+   Pattern matching characters::
+
+        *       matches everything
+        ?       matches any single character
+        [seq]   matches any character in seq
+        [!seq]  matches any char not in seq
+
+   Default patterns are ``.* _* CVS {args}``. Setting a ``norecursedir``
+   replaces the default.  Here is an example of how to avoid
+   certain directories::
+
+    # content of setup.cfg
+    [pytest]
+    norecursedirs = .svn _build tmp*
+
+   This would tell py.test to not look into typical subversion or
+   sphinx-build directories or into any ``tmp`` prefixed directory.
+
+.. confval:: python_files
+
+   One or more Glob-style file patterns determining which python files
+   are considered as test modules.
+
+.. confval:: python_classes
+
+   One or more name prefixes determining which test classes
+   are considered as test modules.
+
+.. confval:: python_functions
+
+   One or more name prefixes determining which test functions
+   and methods are considered as test modules.
+
+   See :ref:`change naming conventions` for examples.

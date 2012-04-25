@@ -1,0 +1,35 @@
+Running tests written for nose
+=======================================
+
+.. include:: links.inc
+
+py.test has basic support for running tests written for nose_.
+
+Usage
+-------------
+
+type::
+
+    py.test  # instead of 'nosetests'
+
+and you should be able to run your nose style tests and
+make use of py.test's capabilities.
+
+Supported nose Idioms
+----------------------
+
+* setup and teardown at module/class/method level
+* SkipTest exceptions and markers
+* setup/teardown decorators
+* yield-based tests and their setup
+* general usage of nose utilities
+
+Unsupported idioms / known issues
+----------------------------------
+
+- nose-style doctests are not collected and executed correctly,
+  also doctest fixtures don't work.
+
+- no nose-configuration is recognized
+
+

@@ -1,0 +1,94 @@
+Changing standard (Python) test discovery
+===============================================
+
+Changing directory recursion
+-----------------------------------------------------
+
+You can set the :confval:`norecursedirs` option in an ini-file, for example your ``setup.cfg`` in the project root directory::
+
+    # content of setup.cfg
+    [pytest]
+    norecursedirs = .svn _build tmp*
+
+This would tell py.test to not recurse into typical subversion or sphinx-build directories or into any ``tmp`` prefixed directory.
+
+.. _`change naming conventions`:
+
+Changing naming conventions
+-----------------------------------------------------
+
+You can configure different naming conventions by setting
+the :confval:`python_files`, :confval:`python_classes` and
+:confval:`python_functions` configuration options.  Example::
+
+    # content of setup.cfg
+    # can also be defined in in tox.ini or pytest.ini file
+    [pytest]
+    python_files=check_*.py
+    python_classes=Check
+    python_functions=check
+
+This would make py.test look for ``check_`` prefixes in
+Python filenames, ``Check`` prefixes in classes and ``check`` prefixes
+in functions and classes.  For example, if we have::
+
+    # content of check_myapp.py
+    class CheckMyApp:
+        def check_simple(self):
+            pass
+        def check_complex(self):
+            pass
+
+then the test collection looks like this::
+
+    $ py.test --collectonly
+    =========================== test session starts ============================
+    platform darwin -- Python 2.7.1 -- pytest-2.2.2
+    collecting ... collected 2 items
+    <Module 'check_myapp.py'>
+      <Class 'CheckMyApp'>
+        <Instance '()'>
+          <Function 'check_simple'>
+          <Function 'check_complex'>
+    
+    =============================  in 0.01 seconds =============================
+
+Interpreting cmdline arguments as Python packages
+-----------------------------------------------------
+
+You can use the ``--pyargs`` option to make py.test try
+interpreting arguments as python package names, deriving
+their file system path and then running the test. For
+example if you have unittest2 installed you can type::
+
+    py.test --pyargs unittest2.test.test_skipping -q
+
+which would run the respective test module.  Like with
+other options, through an ini-file and the :confval:`addopts` option you
+can make this change more permanently::
+
+    # content of pytest.ini
+    [pytest]
+    addopts = --pyargs
+
+Now a simple invocation of ``py.test NAME`` will check
+if NAME exists as an importable package/module and otherwise
+treat it as a filesystem path.
+
+Finding out what is collected
+-----------------------------------------------
+
+You can always peek at the collection tree without running tests like this::
+
+    . $ py.test --collectonly pythoncollection.py
+    =========================== test session starts ============================
+    platform darwin -- Python 2.7.1 -- pytest-2.2.2
+    collecting ... collected 3 items
+    <Module 'pythoncollection.py'>
+      <Function 'test_function'>
+      <Class 'TestClass'>
+        <Instance '()'>
+          <Function 'test_method'>
+          <Function 'test_anothermethod'>
+    
+    =============================  in 0.01 seconds =============================

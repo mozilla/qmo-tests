@@ -1,0 +1,146 @@
+Some Issues and Questions
+==================================
+
+.. note::
+
+    If you don't find an answer here, checkout the :ref:`contact channels`
+    to get help.
+
+On naming, nosetests, licensing and magic
+------------------------------------------------
+
+Why a ``py.test`` instead of a ``pytest`` command?
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Some of the reasons are historic, others are practical.  ``py.test``
+used to be part of the ``py`` package which provided several developer
+utilities, all starting with ``py.<TAB>``, thus providing nice
+TAB-completion. If
+you install ``pip install pycmd`` you get these tools from a separate
+package.  These days the command line tool could be called ``pytest``
+but since many people have gotten used to the old name and there
+is another tool named "pytest" we just decided to stick with
+``py.test``.
+
+How does py.test relate to nose and unittest?
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+py.test and nose_ share basic philosophy when it comes
+to running and writing Python tests.  In fact, you can run many tests
+written for nose with py.test.  nose_ was originally created
+as a clone of ``py.test`` when py.test was in the ``0.8`` release
+cycle.  Note that starting with pytest-2.0 support for running unittest
+test suites is majorly improved and you should be able to run
+many Django and Twisted test suites without modification.
+
+.. _features: test/features.html
+
+
+What's this "magic" with py.test?
+++++++++++++++++++++++++++++++++++++++++++
+
+Around 2007 (version ``0.8``) some people claimed that py.test
+was using too much "magic".  Partly this has been fixed by removing
+unused, deprecated or complicated code.  It is today probably one
+of the smallest, most universally runnable and most
+customizable testing frameworks for Python.   However,
+``py.test`` still uses many metaprogramming techniques and
+reading its source is thus likely not something for Python beginners.
+
+A second "magic" issue is arguably the assert statement debugging feature. When
+loading test modules py.test rewrites the source code of assert statements. When
+a rewritten assert statement fails, its error message has more information than
+the original. py.test also has a second assert debugging technique. When an
+``assert`` statement that was missed by the rewriter fails, py.test
+re-interprets the expression to show intermediate values if a test fails. This
+second technique suffers from a caveat that the rewriting does not: If your
+expression has side effects (better to avoid them anyway!) the intermediate
+values may not be the same, confusing the reinterpreter and obfuscating the
+initial error (this is also explained at the command line if it happens).
+You can turn off all assertion debugging with ``py.test --assertmode=off``.
+
+.. _`py namespaces`: index.html
+.. _`py/__init__.py`: http://bitbucket.org/hpk42/py-trunk/src/trunk/py/__init__.py
+
+
+Function arguments, parametrized tests and setup
+-------------------------------------------------------
+
+.. _funcargs: test/funcargs.html
+
+Is using funcarg- versus xUnit setup a style question?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+For simple applications and for people experienced with nose_ or
+unittest-style test setup using `xUnit style setup`_ probably
+feels natural.  For larger test suites, parametrized testing
+or setup of complex test resources using funcargs_ may feel more natural.
+Moreover, funcargs are ideal for writing advanced test support
+code (like e.g. the monkeypatch_, the tmpdir_ or capture_ funcargs)
+because the support code can register setup/teardown functions
+in a managed class/module/function scope.
+
+.. _monkeypatch: test/plugin/monkeypatch.html
+.. _tmpdir: test/plugin/tmpdir.html
+.. _capture: test/plugin/capture.html
+
+.. _`why pytest_pyfuncarg__ methods?`:
+
+Why the ``pytest_funcarg__*`` name for funcarg factories?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+We like `Convention over Configuration`_ and didn't see much point
+in allowing a more flexible or abstract mechanism.  Moreover,
+it is nice to be able to search for ``pytest_funcarg__MYARG`` in
+source code and safely find all factory functions for
+the ``MYARG`` function argument.
+
+.. _`Convention over Configuration`: http://en.wikipedia.org/wiki/Convention_over_Configuration
+
+Can I yield multiple values from a funcarg factory function?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+There are two conceptual reasons why yielding from a factory function
+is not possible:
+
+* Calling factories for obtaining test function arguments
+  is part of setting up and running a test.  At that
+  point it is not possible to add new test calls to
+  the test collection anymore.
+
+* If multiple factories yielded values there would
+  be no natural place to determine the combination
+  policy - in real-world examples some combinations
+  often should not run.
+
+Use the `pytest_generate_tests`_ hook to solve both issues
+and implement the `parametrization scheme of your choice`_.
+
+.. _`pytest_generate_tests`: test/funcargs.html#parametrizing-tests
+.. _`parametrization scheme of your choice`: http://tetamap.wordpress.com/2009/05/13/parametrizing-python-tests-generalized/
+
+py.test interaction with other packages
+---------------------------------------------------
+
+Issues with py.test, multiprocess and setuptools?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+On windows the multiprocess package will instantiate sub processes
+by pickling and thus implicitly re-import a lot of local modules.
+Unfortunately, setuptools-0.6.11 does not ``if __name__=='__main__'``
+protect its generated command line script.  This leads to infinite
+recursion when running a test that instantiates Processes.
+
+A good solution is to `install Distribute`_ as a drop-in replacement
+for setuptools and then re-install ``pytest``.  Otherwise you could
+fix the script that is created by setuptools by inserting an
+``if __name__ == '__main__'``.  Or you can create a "pytest.py"
+script with this content and invoke that with the python version::
+
+    import pytest
+    if __name__ == '__main__':
+        pytest.main()
+
+.. _`install distribute`: http://pypi.python.org/pypi/distribute#installation-instructions
+
+.. include:: links.inc

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,7 +11,7 @@ from page import Page
 class BasePage(Page):
 
     _page_title_locator = (By.CSS_SELECTOR, "h1.page-title")
-    
+
     @property
     def is_logged_in(self):
         return self.login_region.is_logout_visible

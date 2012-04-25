@@ -1,0 +1,235 @@
+Installation and Getting Started
+===================================
+
+**Pythons**: Python 2.4-3.2, Jython, PyPy
+
+**Platforms**: Unix/Posix and Windows
+
+**PyPI package name**: `pytest <http://pypi.python.org/pypi/pytest>`_
+
+**documentation as PDF**: `download latest <http://pytest.org/latest/pytest.pdf>`_
+
+.. _`getstarted`:
+
+Installation
+----------------------------------------
+
+Installation options::
+
+    pip install -U pytest # or
+    easy_install -U pytest
+
+To check your installation has installed the correct version::
+
+    $ py.test --version
+    This is py.test version 2.2.2, imported from /Users/hpk/p/pytest/pytest.pyc
+    setuptools registered plugins:
+      pytest-xdist-1.8 at /Users/hpk/p/pytest-xdist/xdist/plugin.pyc
+      pytest-cov-1.4 at /Users/hpk/venv/0/lib/python2.7/site-packages/pytest_cov.pyc
+
+If you get an error checkout :ref:`installation issues`.
+
+.. _`simpletest`:
+
+Our first test run
+----------------------------------------------------------
+
+Let's create a first test file with a simple test function::
+
+    # content of test_sample.py
+    def func(x):
+        return x + 1
+
+    def test_answer():
+        assert func(3) == 5
+
+That's it. You can execute the test function now::
+
+    $ py.test
+    =========================== test session starts ============================
+    platform darwin -- Python 2.7.1 -- pytest-2.2.2
+    collecting ... collected 1 items
+    
+    test_sample.py F
+    
+    ================================= FAILURES =================================
+    _______________________________ test_answer ________________________________
+    
+        def test_answer():
+    >       assert func(3) == 5
+    E       assert 4 == 5
+    E        +  where 4 = func(3)
+    
+    test_sample.py:5: AssertionError
+    ========================= 1 failed in 0.02 seconds =========================
+
+py.test found the ``test_answer`` function by following :ref:`standard test discovery rules <test discovery>`, basically detecting the ``test_`` prefixes.  We got a failure report because our little ``func(3)`` call did not return ``5``.
+
+.. note::
+
+    You can simply use the ``assert`` statement for asserting test
+    expectations.  pytest's :ref:`assert introspection` will intelligently
+    report intermediate values of the assert expression freeing
+    you from the need to learn the many names of `JUnit legacy methods`_.
+
+.. _`JUnit legacy methods`: http://docs.python.org/library/unittest.html#test-cases
+
+.. _`assert statement`: http://docs.python.org/reference/simple_stmts.html#the-assert-statement
+
+Asserting that a certain exception is raised
+--------------------------------------------------------------
+
+If you want to assert that some code raises an exception you can
+use the ``raises`` helper::
+
+    # content of test_sysexit.py
+    import pytest
+    def f():
+        raise SystemExit(1)
+
+    def test_mytest():
+        with pytest.raises(SystemExit):
+            f()
+
+Running it with, this time in "quiet" reporting mode::
+
+    $ py.test -q test_sysexit.py
+    collecting ... collected 1 items
+    .
+    1 passed in 0.01 seconds
+
+.. todo:: For further ways to assert exceptions see the `raises`
+
+Grouping multiple tests in a class
+--------------------------------------------------------------
+
+Once you start to have more than a few tests it often makes sense
+to group tests logically, in classes and modules.  Let's write a class
+containing two tests::
+
+    # content of test_class.py
+    class TestClass:
+        def test_one(self):
+            x = "this"
+            assert 'h' in x
+
+        def test_two(self):
+            x = "hello"
+            assert hasattr(x, 'check')
+
+The two tests are found because of the standard :ref:`test discovery`.
+There is no need to subclass anything.  We can simply
+run the module by passing its filename::
+
+    $ py.test -q test_class.py
+    collecting ... collected 2 items
+    .F
+    ================================= FAILURES =================================
+    ____________________________ TestClass.test_two ____________________________
+    
+    self = <test_class.TestClass instance at 0x1013225a8>
+    
+        def test_two(self):
+            x = "hello"
+    >       assert hasattr(x, 'check')
+    E       assert hasattr('hello', 'check')
+    
+    test_class.py:8: AssertionError
+    1 failed, 1 passed in 0.03 seconds
+
+The first test passed, the second failed. Again we can easily see
+the intermediate values used in the assertion, helping us to
+understand the reason for the failure.
+
+Going functional: requesting a unique temporary directory
+--------------------------------------------------------------
+
+For functional tests one often needs to create some files
+and pass them to application objects.  py.test provides
+the versatile :ref:`funcarg mechanism` which allows to request
+arbitrary resources, for example a unique temporary directory::
+
+    # content of test_tmpdir.py
+    def test_needsfiles(tmpdir):
+        print tmpdir
+        assert 0
+
+We list the name ``tmpdir`` in the test function signature and
+py.test will lookup and call a factory to create the resource
+before performing the test function call.  Let's just run it::
+
+    $ py.test -q test_tmpdir.py
+    collecting ... collected 1 items
+    F
+    ================================= FAILURES =================================
+    _____________________________ test_needsfiles ______________________________
+    
+    tmpdir = local('/Users/hpk/tmp/pytest-20/test_needsfiles0')
+    
+        def test_needsfiles(tmpdir):
+            print tmpdir
+    >       assert 0
+    E       assert 0
+    
+    test_tmpdir.py:3: AssertionError
+    ----------------------------- Captured stdout ------------------------------
+    /Users/hpk/tmp/pytest-20/test_needsfiles0
+    1 failed in 0.11 seconds
+
+Before the test runs, a unique-per-test-invocation temporary directory
+was created.  More info at :ref:`tmpdir handling`.
+
+You can find out what kind of builtin :ref:`funcargs` exist by typing::
+
+    py.test --funcargs   # shows builtin and custom function arguments
+
+Where to go next
+-------------------------------------
+
+Here are a few suggestions where to go next:
+
+* :ref:`cmdline` for command line invocation examples
+* :ref:`good practises <goodpractises>` for virtualenv, test layout, genscript support
+* :ref:`apiref` for documentation and examples on using py.test
+* :ref:`plugins` managing and writing plugins
+
+.. _`installation issues`:
+
+Known Installation issues
+------------------------------
+
+easy_install or pip not found?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. _`install pip`: http://www.pip-installer.org/en/latest/index.html
+
+`Install pip`_ for a state of the art python package installer.
+
+Or consult `distribute docs`_ to install the ``easy_install``
+tool on your machine.  
+
+You may also use the older `setuptools`_ project but it lacks bug fixes
+and does not work on Python3.
+
+py.test not found on Windows despite installation?
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. _`Python for Windows`: http://www.imladris.com/Scripts/PythonForWindows.html
+
+- **Windows**: If "easy_install" or "py.test" are not found
+  you need to add the Python script path to your ``PATH``, see here:
+  `Python for Windows`_.  You may alternatively use an `ActivePython install`_
+  which does this for you automatically.
+
+.. _`ActivePython install`: http://www.activestate.com/activepython/downloads
+
+.. _`Jython does not create command line launchers`: http://bugs.jython.org/issue1491
+
+- **Jython2.5.1 on Windows XP**: `Jython does not create command line launchers`_
+  so ``py.test`` will not work correctly.  You may install py.test on
+  CPython and type ``py.test --genscript=mytest`` and then use
+  ``jython mytest`` to run py.test for your tests to run with Jython.
+
+ :ref:`examples` for more complex examples
+
+.. include:: links.inc
