@@ -6,6 +6,7 @@
 
 from base import BasePage
 
+
 class DocsPage(BasePage):
 
     _page_title = u"Docs | QMO \u2013 quality.mozilla.org"
