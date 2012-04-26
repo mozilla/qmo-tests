@@ -9,10 +9,10 @@ from base import BasePage
 
 class MediaPage(BasePage):
 
-    _page_title = u"QMO Videos | QMO \u2013 quality.mozilla.org"
+    _page_title = u'QMO Videos | QMO \u2013 quality.mozilla.org'
 
     def go_to_media_page(self):
-        self.selenium.get(self.testsetup.base_url + "/media")
+        self.selenium.get(self.testsetup.base_url + '/media')
         self.is_the_current_page
 
     @property

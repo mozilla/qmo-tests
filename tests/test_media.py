@@ -7,7 +7,6 @@
 from unittestzero import Assert
 
 from pages.media import MediaPage
-
 from pages.home import HomePage
 
 
@@ -16,5 +15,5 @@ class TestMediaPage:
     def test_media_title(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
-        media_page = home_page.header_region.click_media_link()
+        media_page = home_page.header_region.go_to_media_page()
         Assert.true(media_page.is_the_current_page)

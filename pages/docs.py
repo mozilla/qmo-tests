@@ -9,10 +9,10 @@ from base import BasePage
 
 class DocsPage(BasePage):
 
-    _page_title = u"Docs | QMO \u2013 quality.mozilla.org"
+    _page_title = u'Docs | QMO \u2013 quality.mozilla.org'
 
     def go_to_docs_page(self):
-        self.selenium.get(self.testsetup.base_url + "/docs")
+        self.selenium.get(self.testsetup.base_url + '/docs')
         self.is_the_current_page
 
     @property
