@@ -10,6 +10,7 @@ from pages.docs import DocsPage
 
 from pages.home import HomePage
 
+
 class TestDocsPage:
 
     def test_docs_title(self, mozwebqa):
@@ -17,4 +18,3 @@ class TestDocsPage:
         home_page.go_to_home_page()
         docs_page = home_page.header_region.click_docs_link()
         Assert.true(docs_page.is_the_current_page)
-
