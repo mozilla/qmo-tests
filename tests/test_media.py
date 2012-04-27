@@ -15,5 +15,5 @@ class TestMediaPage:
     def test_media_title(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
-        media_page = home_page.header_region.go_to_media_page()
+        media_page = home_page.header_region.click_media_link()
         Assert.true(media_page.is_the_current_page)

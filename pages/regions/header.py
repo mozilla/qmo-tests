@@ -14,12 +14,12 @@ class HeaderRegion(Page):
     _media_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(5) a')
     _docs_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(6) a')
 
-    def go_to_media_page(self):
+    def click_media_link(self):
         self.selenium.find_element(*self._media_link_locator).click()
         from pages.media import MediaPage
         return MediaPage(self.testsetup)
 
-    def go_to_docs_page(self):
+    def click_docs_link(self):
         self.selenium.find_element(*self._docs_link_locator).click()
         from pages.docs import DocsPage
         return DocsPage(self.testsetup)
