@@ -7,11 +7,12 @@
 from base import BasePage
 
 
-class DocsPage(BasePage):
-    _page_title = u'Docs | QMO \u2013 quality.mozilla.org'
+class MediaPage(BasePage):
 
-    def go_to_docs_page(self):
-        self.selenium.get(self.testsetup.base_url + '/docs')
+    _page_title = u'QMO Videos | QMO \u2013 quality.mozilla.org'
+
+    def go_to_media_page(self):
+        self.selenium.get(self.testsetup.base_url + '/media')
         self.is_the_current_page
 
     @property
