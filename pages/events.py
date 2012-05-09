@@ -14,7 +14,3 @@ class EventsPage(BasePage):
     def go_to_events_page(self):
         self.selenium.get(self.testsetup.base_url + '/events')
         self.is_the_current_page
-
-    @property
-    def is_page_title_correct(self):
-        return self.selenium.get_title() == self._page_title
