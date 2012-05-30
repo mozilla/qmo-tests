@@ -18,7 +18,7 @@ class HeaderRegion(Page):
         self.selenium.find_element(*self._events_link_locator).click()
         from pages.events import EventsPage
         return EventsPage(self.testsetup)
-        
+
     def click_media_link(self):
         self.selenium.find_element(*self._media_link_locator).click()
         from pages.media import MediaPage

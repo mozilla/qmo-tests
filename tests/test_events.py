@@ -6,12 +6,13 @@
 
 from unittestzero import Assert
 
-from pages.events import MediaPage
+from pages.events import EventsPage
 from pages.home import HomePage
 
 
 class TestEventsPage:
 
+    @pytest.mark.nondestructive
     def test_events_title(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
