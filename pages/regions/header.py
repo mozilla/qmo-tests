@@ -10,8 +10,14 @@ from selenium.webdriver.common.by import By
 
 
 class HeaderRegion(Page):
+    _events_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(4) a')
     _media_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(5) a')
     _docs_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(6) a')
+
+    def click_events_link(self):
+        self.selenium.find_element(*self._events_link_locator).click()
+        from pages.events import EventsPage
+        return EventsPage(self.testsetup)
 
     def click_media_link(self):
         self.selenium.find_element(*self._media_link_locator).click()
