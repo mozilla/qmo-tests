@@ -12,6 +12,7 @@ from pages.home import HomePage
 
 class TestMediaPage:
 
+    @pytest.mark.nondestructive
     def test_media_title(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
