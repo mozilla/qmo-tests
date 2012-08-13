@@ -12,6 +12,7 @@ from pages.home import HomePage
 
 class TestDocsPage:
 
+    @pytest.mark.nondestructive
     def test_docs_title(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
