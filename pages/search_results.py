@@ -12,17 +12,12 @@ from base import BasePage
 class SearchResultsPage(BasePage):
   
     _page_title = u'Search results'
-    #_search_page_header_locator = (By.ID, 'section-title')
+
 
     def go_to_docs_page(self):
         self.selenium.get(self.testsetup.base_url + '/?s')
         self.is_the_current_page
-        
-   # @property
-   # def search_page_title(self):
-        #return self.selenium.find_element(*self._search_page_header_locator).text
 
     @property
     def is_page_title_correct(self):
         return self.selenium.get_title() == self._page_title
-
