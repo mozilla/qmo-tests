@@ -10,9 +10,8 @@ from base import BasePage
 
 
 class SearchResultsPage(BasePage):
-  
-    _page_title = u'Search results'
 
+    _page_title = u'Search results'
 
     def go_to_docs_page(self):
         self.selenium.get(self.testsetup.base_url + '/?s')
