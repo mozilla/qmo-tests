@@ -5,7 +5,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
 from unittestzero import Assert
 
 
@@ -30,3 +29,6 @@ class Page(object):
             return self.selenium.find_element(*locator).is_displayed()
         except:
             return False
+
+    def get_url_current_page(self):
+        return self.selenium.current_url

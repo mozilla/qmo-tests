@@ -20,3 +20,4 @@ class TestSearchPage:
 
         search_results_page = home_page.header_region.click_search_button()
         Assert.true(home_page.is_the_current_page)
+        Assert.true(search_results_page.get_url_current_page().endswith('/?s='))
