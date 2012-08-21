@@ -29,3 +29,6 @@ class Page(object):
             return self.selenium.find_element(*locator).is_displayed()
         except:
             return False
+
+    def get_url_current_page(self):
+        return self.selenium.current_url
