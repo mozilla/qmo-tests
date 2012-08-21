@@ -8,7 +8,6 @@ import pytest
 from unittestzero import Assert
 
 from pages.home import HomePage
-from pages.search_results import SearchResultsPage
 
 
 class TestSearchPage:
@@ -18,6 +17,6 @@ class TestSearchPage:
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
 
-        search_results_page = home_page.header_region.click_search_button()
+        home_page.header_region.click_search_button()
         Assert.true(home_page.is_the_current_page)
-        Assert.true(search_results_page.get_url_current_page().endswith('/?s='))
+        Assert.true(home_page.get_url_current_page().endswith('/?s='))
