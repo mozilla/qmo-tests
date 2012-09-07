@@ -15,6 +15,7 @@ class HeaderRegion(Page):
     _media_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(5) a')
     _docs_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(6) a')
     _search_button_locator = (By.CSS_SELECTOR, '#search button')
+    _search_field_locator = (By.CSS_SELECTOR, '#search')
 
     def click_community_link(self):
         self.selenium.find_element(*self._community_link_locator).click()
@@ -40,3 +41,11 @@ class HeaderRegion(Page):
         self.selenium.find_element(*self._search_button_locator).click()
         from pages.search_results import SearchResultsPage
         return SearchResultsPage(self.testsetup)
+
+    def click_search_field(self):
+        self.selenium.find_element(*self._search_field_locator).click()
+        from pages.search_results import SearchResultsPage
+        return SearchResultsPage(self.testsetup)
+
+    def type_in_search_field(self, text):
+        self.selenium.find_element(*self._search_field_locator).send_keys(text)
