@@ -27,9 +27,8 @@ class TestSearchPage:
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
         
-        search_results_page = home_page.header_region.type_in_search_field('job board')
+        home_page.header_region.type_in_search_field('job board')
         search_results_page = home_page.header_region.click_search_button()
 
         expected_text= "Search results"
         Assert.contains(expected_text, search_results_page._page_title)
-        Assert.true(search_results_page.get_url_current_page().endswith('/?s='))
