@@ -32,3 +32,4 @@ class TestSearchPage:
 
         expected_text= "Search results"
         Assert.contains(expected_text, search_results_page._page_title)
+        Assert.greater(len(search_results_page.results), 0)

@@ -25,3 +25,7 @@ class SearchResultsPage(BasePage):
     @property
     def search_text(self):
         return self.selenium.find_element(*self._search_text_locator).text
+
+    @property
+    def results(self):
+        return self.selenium.find_elements(By.CSS_SELECTOR, "#content-main > article")
