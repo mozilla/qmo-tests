@@ -8,6 +8,7 @@ import pytest
 from unittestzero import Assert
 
 from pages.home import HomePage
+from pages.search_results import SearchResultsPage
 
 
 class TestSearchPage:
@@ -20,3 +21,15 @@ class TestSearchPage:
         home_page.header_region.click_search_button()
         Assert.true(home_page.is_the_current_page)
         Assert.true(home_page.get_url_current_page().endswith('/?s='))
+
+    @pytest.mark.nondestructive
+    def test_search_results_returned(self,mozwebqa):
+        home_page = HomePage(mozwebqa)
+        home_page.go_to_home_page()
+        
+        home_page.header_region.type_in_search_field('job board')
+        search_results_page = home_page.header_region.click_search_button()
+
+        expected_text= "Search results"
+        Assert.contains(expected_text, search_results_page._page_title)
+        Assert.greater(len(search_results_page.results), 0)
