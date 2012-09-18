@@ -19,5 +19,7 @@ class CommunityPage(BasePage):
         self.is_the_current_page
 
     @property
-    def find_tag_link(self):
-        return self.selenium.find_element(*self._tag_locator)
+    def click_first_tag_link(self):
+        self.selenium.find_element(*self._tag_locator).click()
+        from pages.tag_results import TagResultsPage
+        return TagResultsPage(self.testsetup)

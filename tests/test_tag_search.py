@@ -18,7 +18,6 @@ class TestTagSearchPage:
         community_page = CommunityPage(mozwebqa)
         community_page.go_to_community_page()
 
-        tag_results_page = community_page.find_tag_link.click()
+        tag_results_page = community_page.click_first_tag_link
 
-        Assert.contains(tag_results_page._page_title)
-        #Assert.greater(len(tag_results_page.results), 0)
+        Assert.greater(len(tag_results_page.results), 0)
