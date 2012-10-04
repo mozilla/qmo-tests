@@ -14,9 +14,11 @@ from pages.author import AuthorPage
 class TestUserRegistration:
 
     @pytest.mark.nondestructive
-    def test_that_user_profile(self, mozwebqa):
+    def test_that_accessing_author_profile_works(self, mozwebqa):
         author_name = "rbillings"
 
         author_page = AuthorPage(mozwebqa, author_name)
-        author_page.go_to_author_page(author_name)
+        author_page.go_to_author_page()
+        
         Assert.true(author_page.is_the_current_page)
+        Assert.greater(len(author_page.posted_by), 0)
