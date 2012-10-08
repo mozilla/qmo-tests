@@ -19,6 +19,6 @@ class TestUserRegistration:
 
         author_page = AuthorPage(mozwebqa, author_name)
         author_page.go_to_author_page()
-        
+
         Assert.true(author_page.is_the_current_page)
         Assert.greater(len(author_page.posted_by), 0)
