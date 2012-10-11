@@ -11,16 +11,6 @@ from base import BasePage
 
 class TagResultsPage(BasePage):
 
-    _page_title = u'Posts tagged'
-
-    def tag_results_page(self):
-        self.selenium.get(self.testsetup.base_url + '/tag/a11y/')
-        self.is_the_current_page
-
-    @property
-    def is_page_title_correct(self):
-        return self.selenium.get_title() == self._page_title
-
     @property
     def results(self):
         return self.selenium.find_elements(By.CSS_SELECTOR, "#content-main > article")

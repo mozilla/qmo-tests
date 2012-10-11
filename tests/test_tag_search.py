@@ -20,4 +20,5 @@ class TestTagSearchPage:
 
         tag_results_page = community_page.click_first_tag_link
 
+        Assert.contains('Posts and pages tagged', tag_results_page.page_title)
         Assert.greater(len(tag_results_page.results), 0)
