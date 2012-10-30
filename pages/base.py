@@ -11,7 +11,7 @@ from page import Page
 
 class BasePage(Page):
 
-    _page_title_locator = (By.CSS_SELECTOR, "h1.page-title")
+    _page_title_locator = (By.CSS_SELECTOR, "h1.section-title")
 
     @property
     def is_logged_in(self):
