@@ -11,6 +11,8 @@ from base import BasePage
 
 class TagResultsPage(BasePage):
 
+    _search_result_item_locator = (By.CSS_SELECTOR, "#content-main > article")
+
     @property
     def results(self):
-        return self.selenium.find_elements(By.CSS_SELECTOR, "#content-main > article")
+        return self.find_elements(*self._search_result_item_locator)

@@ -11,7 +11,7 @@ from page import Page
 
 class BasePage(Page):
 
-    _page_title_locator = (By.CSS_SELECTOR, "h1.section-title")
+    _page_title_locator = (By.CSS_SELECTOR, 'h1.section-title')
 
     @property
     def is_logged_in(self):
@@ -24,7 +24,7 @@ class BasePage(Page):
 
     @property
     def page_title(self):
-        return self.selenium.find_element(*self._page_title_locator).text
+        return self.find_element(*self._page_title_locator).text
 
     @property
     def header_region(self):

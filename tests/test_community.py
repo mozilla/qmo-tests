@@ -7,7 +7,6 @@
 import pytest
 from unittestzero import Assert
 
-from pages.community import CommunityPage
 from pages.home import HomePage
 
 
