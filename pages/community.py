@@ -15,11 +15,10 @@ class CommunityPage(BasePage):
     _tag_locator = (By.CSS_SELECTOR, '#tag_cloud-3 a')
 
     def go_to_community_page(self):
-        self.selenium.get(self.testsetup.base_url + '/community')
+        self.get_relative_path('/community')
         self.is_the_current_page
 
-    @property
     def click_first_tag_link(self):
-        self.selenium.find_element(*self._tag_locator).click()
+        self.find_element(*self._tag_locator).click()
         from pages.tag_results import TagResultsPage
         return TagResultsPage(self.testsetup)

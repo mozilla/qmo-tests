@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -21,15 +22,15 @@ class LoginRegion(Page):
         return self.is_element_visible(self._logout_link_locator)
 
     def click_sign_up(self):
-        self.selenium.find_element(*self._sign_up_link_locator).click()
+        self.find_element(*self._sign_up_link_locator).click()
         from pages.registration import RegistrationPage
         return RegistrationPage(self.testsetup)
 
     def login(self, user='default'):
         credentials = self.testsetup.credentials[user]
-        self.selenium.find_element(*self._login_username_field_locator).send_keys(credentials['username'])
-        self.selenium.find_element(*self._login_password_field_locator).send_keys(credentials['password'])
-        self.selenium.find_element(*self._login_submit_button_locator).click()
+        self.type_in_element(self._login_username_field_locator, credentials['username'])
+        self.type_in_element(self._login_password_field_locator, credentials['password'])
+        self.find_element(*self._login_submit_button_locator).click()
 
     def logout(self):
-        self.selenium.find_element(*self._logout_link_locator).click()
+        self.find_element(*self._logout_link_locator).click()

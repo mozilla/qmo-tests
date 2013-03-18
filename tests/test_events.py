@@ -7,7 +7,6 @@
 import pytest
 from unittestzero import Assert
 
-from pages.events import EventsPage
 from pages.home import HomePage
 
 

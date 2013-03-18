@@ -12,5 +12,5 @@ class EventsPage(BasePage):
     _page_title = u'Events | QMO \u2013 quality.mozilla.org'
 
     def go_to_events_page(self):
-        self.selenium.get(self.testsetup.base_url + '/events')
+        self.get_relative_path('/events')
         self.is_the_current_page
