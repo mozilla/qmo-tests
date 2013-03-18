@@ -14,10 +14,6 @@ from page import Page
 
 class LinkCrawler(Page):
 
-    def __init__(self, testsetup, verify_ssl=False):
-        Page.__init__(self, testsetup)
-        self.verify_ssl = verify_ssl
-
     def collect_links(self, url, name=True, **kwargs):
 
         """ Collects links for given page URL.
@@ -30,12 +26,12 @@ class LinkCrawler(Page):
 
         """
 
-        # prepend base_url to relative url
+        # support for relative URL
         if not url.startswith('http'):
             url = u'%s%s' % (self.base_url, url)
 
         # get the page and verify status code is OK
-        r = requests.get(url, verify=self.verify_ssl)
+        r = requests.get(url, verify=False)
 
         Assert.true(
             r.status_code == requests.codes.ok,
@@ -51,7 +47,7 @@ class LinkCrawler(Page):
     def verify_status_code_is_ok(self, url):
         # don't fail if something went wrong
         try:
-            r = requests.get(url, self.verify_ssl)
+            r = requests.get(url, verify=False)
         except (RequestException, ConnectionError), e:
             return u'request to {0} failed due {1}'.format(url, e)
 

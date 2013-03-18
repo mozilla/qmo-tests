@@ -10,7 +10,7 @@ from unittestzero import Assert
 from pages.link_crawler import LinkCrawler
 
 
-class TestDocsPage:
+class TestLinksReturnGoodStatusCode:
 
     @pytest.mark.skip_selenium
     @pytest.mark.nondestructive
