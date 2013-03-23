@@ -22,3 +22,11 @@ class CommunityPage(BasePage):
         self.find_element(*self._tag_locator).click()
         from pages.tag_results import TagResultsPage
         return TagResultsPage(self.testsetup)
+
+    def click_tag_link(self, tag_name):
+        for tag in self.find_elements(*self._tag_locator):
+            if tag.text == tag_name:
+                tag.click()
+                from pages.tag_results import TagResultsPage
+                return TagResultsPage(self.testsetup, tag_name=tag_name)
+        raise Exception(u'%s tag is not found' % tag_name)

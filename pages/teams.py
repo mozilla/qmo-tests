@@ -24,7 +24,7 @@ class TeamsPage(BasePage):
         for team in self.teams:
             if team.name == team_name:
                 return team.open_team_page(team_name)
-        raise NameError(u'There is no team with such name: %s' % team_name)
+        raise Exception(u'There is no team with such name: %s' % team_name)
 
     @property
     def teams(self):
