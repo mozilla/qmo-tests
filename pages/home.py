@@ -23,3 +23,8 @@ class HomePage(BasePage):
         r = requests.get(self.base_url, verify=False)
         html = BeautifulSoup(r.content)
         return html.find(attrs={'rel': 'shortcut icon'}).get('href')
+
+    @property
+    def paginator(self):
+        from pages.regions.paginator import Paginator
+        return Paginator(self.testsetup)

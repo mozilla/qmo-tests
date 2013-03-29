@@ -58,3 +58,53 @@ class TestHomePage:
         error_message = '\n'.join(err_msg_parts)
 
         Assert.equal(not_found_page.error_message, error_message)
+
+    @pytest.mark.nondestructive
+    def test_paginator(self, mozwebqa):
+        home_page = HomePage(mozwebqa)
+        home_page.go_to_home_page()
+
+        expected_page = 1
+
+        # On the first page, "previous" is not active, and the page url is the home_page
+        Assert.true(home_page.is_the_current_page)
+        Assert.false(home_page.paginator.is_prev_page_visible)
+        Assert.equal(home_page.paginator.page_number, expected_page)
+        Assert.true(home_page.paginator.is_next_page_visible)
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_on, home_page.paginator.page_status)
+
+        # Move forward one page by clicking next
+        home_page.paginator.click_next_page()
+
+        pages_to_test = 5 if home_page.paginator.total_page_number >= 5 else home_page.paginator.total_page_number
+        for i in range(1, pages_to_test):
+            Assert.true(home_page.paginator.is_next_page_visible)
+            Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
+            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_on, home_page.paginator.page_status)
+            Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_on)
+            home_page.paginator.click_next_page()
+
+        for i in range(1, pages_to_test):
+            Assert.true(home_page.paginator.is_prev_page_visible)
+            Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
+            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_on, home_page.paginator.page_status)
+            Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_on)
+            home_page.paginator.click_prev_page()
+
+        # Click last page. "previous" is active, but "next" is not
+        expected_page = home_page.paginator.total_page_number
+
+        home_page.paginator.click_last_page()
+
+        Assert.false(home_page.paginator.is_next_page_visible)
+        Assert.equal(home_page.paginator.page_number, expected_page)
+        Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_on, home_page.paginator.page_status)
+
+        # Click random page
+        home_page.paginator.click_random_page()
+
+        Assert.true(home_page.paginator.is_next_page_visible)
+        Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_on, home_page.paginator.page_status)
+        Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_on)
