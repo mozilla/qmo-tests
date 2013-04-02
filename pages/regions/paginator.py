@@ -11,15 +11,15 @@ from page import Page
 
 class Paginator(Page):
 
-    #Numbering
+    # Page numbering
     _page_number_locator = (By.CSS_SELECTOR, '.current > strong')
     _total_page_number_locator = (By.CSS_SELECTOR, '.pagination ol .last > a')
     _current_page_locator = (By.CSS_SELECTOR, '.page-status')
-    _random_page_locator = (By.CSS_SELECTOR, '.pagination > ol > li:nth-child(6) > a')
 
-    #Navigation
+    # Page navigation
     _prev_locator = (By.CSS_SELECTOR, '.prev > a')
     _next_locator = (By.CSS_SELECTOR, '.next > a')
+    _middle_page_locator = (By.CSS_SELECTOR, '.pagination > ol > li:nth-child(6) > a')
 
     @property
     def page_number(self):
@@ -31,7 +31,7 @@ class Paginator(Page):
         return int(text.split()[3])
 
     @property
-    def current_page_on(self):
+    def current_page_number(self):
         text = self.selenium.find_element(*self._current_page_locator).text
         return int(text.split()[3])
 
@@ -56,5 +56,5 @@ class Paginator(Page):
     def click_last_page(self):
         self.selenium.find_element(*self._total_page_number_locator).click()
 
-    def click_random_page(self):
-        self.selenium.find_element(*self._random_page_locator).click()
+    def click_middle_page(self):
+        self.selenium.find_element(*self._middle_page_locator).click()
