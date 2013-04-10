@@ -23,7 +23,7 @@ class TestEventsPage:
     @pytest.mark.nondestructive
     def test_events_page_link(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
-        urls = crawler.collect_links('/category/events', id='content')
+        urls = crawler.collect_links('/category/events', id='content-main')
         bad_urls = []
 
         Assert.greater(
