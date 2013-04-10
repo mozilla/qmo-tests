@@ -39,7 +39,8 @@ class LinkCrawler(Page):
 
         # parse page and collect links
         parsed_html = BeautifulSoup(r.text)
-        urls = (anchor['href'] for anchor in parsed_html.find(name, attrs=kwargs).find_all('a'))
+        urls = (anchor['href'] for anchor in
+                parsed_html.find(name, attrs=kwargs).find_all('a'))
 
         # prepend base_url to relative links
         return map(lambda u: u if not u.startswith('/') else '%s%s' % (self.base_url, u), urls)
