@@ -39,8 +39,10 @@ class LinkCrawler(Page):
 
         # parse page and collect links
         parsed_html = BeautifulSoup(r.text)
-        urls = (anchor['href'] for anchor in
-                parsed_html.find(name, attrs=kwargs).find_all('a'))
+        if url.endswith("/") or url.endswith("/community") or url.endswith("/category/events"):
+            urls = (anchor['href'] for anchor in parsed_html.select('#content a[href*="mozilla.org"]'))
+        else:
+            urls = (anchor['href'] for anchor in parsed_html.find(name, attrs=kwargs).find_all('a'))
 
         # prepend base_url to relative links
         return map(lambda u: u if not u.startswith('/') else '%s%s' % (self.base_url, u), urls)
