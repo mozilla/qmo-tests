@@ -36,7 +36,7 @@ class Paginator(Page):
         return int(text.split()[3])
 
     @property
-    def page_status(self):
+    def page_x_of_y_message(self):
         return self.selenium.find_element(*self._current_page_locator).text
 
     def click_prev_page(self):

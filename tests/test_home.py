@@ -71,7 +71,7 @@ class TestHomePage:
         Assert.false(home_page.paginator.is_prev_page_visible)
         Assert.equal(home_page.paginator.page_number, expected_page)
         Assert.true(home_page.paginator.is_next_page_visible)
-        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_status)
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
 
         # Move forward one page by clicking next
         home_page.paginator.click_next_page()
@@ -81,7 +81,7 @@ class TestHomePage:
         for i in range(1, pages_to_test):
             Assert.true(home_page.paginator.is_next_page_visible)
             Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
-            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_status)
+            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
             Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
             home_page.paginator.click_next_page()
 
@@ -89,7 +89,7 @@ class TestHomePage:
         for i in range(1, pages_to_test):
             Assert.true(home_page.paginator.is_prev_page_visible)
             Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
-            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_status)
+            Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
             Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
             home_page.paginator.click_prev_page()
 
@@ -98,15 +98,16 @@ class TestHomePage:
 
         home_page.paginator.click_last_page()
 
+        Assert.true(home_page.paginator.is_prev_page_visible)
         Assert.false(home_page.paginator.is_next_page_visible)
         Assert.equal(home_page.paginator.page_number, expected_page)
         Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
-        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_status)
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
 
         # Click a middle page from the shown list
         home_page.paginator.click_middle_page()
 
         Assert.true(home_page.paginator.is_next_page_visible)
         Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
-        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_status)
+        Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
         Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
