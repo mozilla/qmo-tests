@@ -61,6 +61,7 @@ class TestHomePage:
         Assert.equal(not_found_page.error_message, error_message)
 
     @pytest.mark.nondestructive
+    @pytest.mark.skip_selenium
     def test_home_page_links(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
         urls = crawler.collect_links('/', id='content')
