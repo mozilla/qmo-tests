@@ -41,6 +41,7 @@ class TestCommunityPage:
             Assert.contains(tag_name, article.related_tags)
 
     @pytest.mark.nondestructive
+    @pytest.mark.skip_selenium
     def test_community_page_links(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
         urls = crawler.collect_links('/community', id='activity-stream')
