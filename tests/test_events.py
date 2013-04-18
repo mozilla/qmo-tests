@@ -21,6 +21,7 @@ class TestEventsPage:
         Assert.true(events_page.is_the_current_page)
 
     @pytest.mark.nondestructive
+    @pytest.mark.skip_selenium
     def test_events_page_link(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
         urls = crawler.collect_links('/category/events', id='content-main')
