@@ -39,7 +39,8 @@ class LinkCrawler(Page):
 
         # parse page and collect links
         parsed_html = BeautifulSoup(r.text)
-        if url.endswith("/community") or url.endswith("/category/events"):
+
+        if url.endswith("/") or url.endswith("/community") or url.endswith("/category/events"):
             urls = (anchor['href'] for anchor in parsed_html.select('#content a[href*="mozilla.org"]'))
         else:
             urls = (anchor['href'] for anchor in parsed_html.find(name, attrs=kwargs).find_all('a'))
