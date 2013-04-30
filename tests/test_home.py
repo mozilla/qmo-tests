@@ -11,6 +11,7 @@ from unittestzero import Assert
 
 from pages.home import HomePage
 from pages.not_found import NotFoundPage
+from pages.link_crawler import LinkCrawler
 
 
 class TestHomePage:
@@ -111,3 +112,21 @@ class TestHomePage:
         Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))
         Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
         Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
+
+    @pytest.mark.skip_selenium
+    @pytest.mark.nondestructive
+    def test_home_page_links(self, mozwebqa):
+        crawler = LinkCrawler(mozwebqa)
+        urls = crawler.collect_links('/', id='content')
+        bad_urls = []
+
+        Assert.greater(len(urls), 0, u'something went wrong. no links found.')
+
+        for url in urls:
+            check_result = crawler.verify_status_code_is_ok(url)
+            if check_result is not True:
+                bad_urls.append(check_result)
+
+        Assert.equal(
+            0, len(bad_urls),
+            u'%s bad links found. ' % len(bad_urls) + ', '.join(bad_urls))
