@@ -49,13 +49,16 @@ class LinkCrawler(Page):
         return map(lambda u: u if not u.startswith('/') else '%s%s' % (self.base_url, u), urls)
 
     def verify_status_code_is_ok(self, url):
-        # don't fail if something went wrong
-        try:
-            r = requests.get(url, verify=False)
-        except (RequestException, ConnectionError), e:
-            return u'request to {0} failed due {1}'.format(url, e)
-
-        if r.status_code == requests.codes.ok:
+        # exclude ftp urls as requests does not support them
+        if url.startswith('ftp://'):
             return True
-        else:
+
+        requests.adapters.DEFAULT_RETRIES = 5
+        try:
+            r = requests.get(url, verify=False, allow_redirects=True)
+        except (RequestException, ConnectionError, requests.Timeout), e:
+            return u'request to {0} failed due {1}'.format(url, e)
+        if not r.status_code == requests.codes.ok:
             return u'{0.url} returned: {0.status_code} {0.reason}'.format(r)
+        else:
+            return True
