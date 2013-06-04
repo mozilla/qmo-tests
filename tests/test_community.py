@@ -51,9 +51,10 @@ class TestCommunityPage:
             len(urls), 0, u'something went wrong. no links found.')
 
         for url in urls:
-            check_result = crawler.verify_status_code_is_ok(url)
-            if check_result is not True:
-                bad_urls.append(check_result)
+            if not 'irc://irc.mozilla.org' in url:
+                check_result = crawler.verify_status_code_is_ok(url)
+                if check_result is not True:
+                    bad_urls.append(check_result)
 
         Assert.equal(
             0, len(bad_urls),
