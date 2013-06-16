@@ -12,7 +12,7 @@ from pages.base import BasePage
 
 class TeamsPage(BasePage):
 
-    _page_title = u'Teams | QMO \u2013 quality.mozilla.org'
+    _page_title = u'Teams | QMO \u2013 quality.(mozilla|allizom).org'
 
     _team_region_locator = (By.CSS_SELECTOR, '.team')
 

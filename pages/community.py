@@ -11,7 +11,8 @@ from base import BasePage
 
 class CommunityPage(BasePage):
 
-    _page_title = u'Community | QMO \u2013 quality.mozilla.org'
+    _page_title = u'Community | QMO \u2013 quality.(mozilla|allizom).org'
+
     _tag_locator = (By.CSS_SELECTOR, '#tag_cloud-3 a')
 
     def go_to_community_page(self):

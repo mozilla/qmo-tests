@@ -12,7 +12,7 @@ from base import BasePage
 
 class RegistrationPage(BasePage):
 
-    _page_title = u'Create an Account | QMO \u2013 quality.mozilla.org'
+    _page_title = u'Create an Account | QMO \u2013 quality.(mozilla|allizom).org'
 
     _username_locator = (By.ID, 'signup_username')
     _username_error_locator = (By.CSS_SELECTOR, 'label[for=signup_username] ~ .error')

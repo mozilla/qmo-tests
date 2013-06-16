@@ -9,7 +9,7 @@ from base import BasePage
 
 class DocsPage(BasePage):
 
-    _page_title = u'Docs | QMO \u2013 quality.mozilla.org'
+    _page_title = u'Docs | QMO \u2013 quality.(mozilla|allizom).org'
 
     def go_to_docs_page(self):
         self.get_relative_path('/docs')

@@ -15,7 +15,7 @@ class AboutTeamPage(BasePage):
 
     @property
     def _page_title(self):
-        return u'%s | Groups | QMO \u2013 quality.mozilla.org' % self.team
+        return u'%s | Groups | QMO \u2013 quality.(mozilla|allizom).org' % self.team
 
     @property
     def team_name(self):

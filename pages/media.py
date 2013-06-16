@@ -9,7 +9,7 @@ from base import BasePage
 
 class MediaPage(BasePage):
 
-    _page_title = u'QMO Videos | QMO \u2013 quality.mozilla.org'
+    _page_title = u'QMO Videos | QMO \u2013 quality.(mozilla|allizom).org'
 
     def go_to_media_page(self):
         self.get_relative_path('/media')

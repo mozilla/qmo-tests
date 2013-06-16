@@ -9,7 +9,7 @@ from base import BasePage
 
 class EventsPage(BasePage):
 
-    _page_title = u'Events | QMO \u2013 quality.mozilla.org'
+    _page_title = u'Events | QMO \u2013 quality.(mozilla|allizom).org'
 
     def go_to_events_page(self):
         self.get_relative_path('/events')

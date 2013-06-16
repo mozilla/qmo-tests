@@ -9,7 +9,7 @@ from base import BasePage
 
 class HomePage(BasePage):
 
-    _page_title = u'QMO \u2013 quality.mozilla.org | The Home of Mozilla QA'
+    _page_title = u'QMO \u2013 quality.(mozilla|allizom).org | The Home of Mozilla QA'
 
     def go_to_home_page(self):
         self.get_relative_path('/')

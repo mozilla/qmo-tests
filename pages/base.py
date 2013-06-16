@@ -4,7 +4,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import re
+
 from selenium.webdriver.common.by import By
+from unittestzero import Assert
 
 from page import Page
 
@@ -12,6 +15,13 @@ from page import Page
 class BasePage(Page):
 
     _page_title_locator = (By.CSS_SELECTOR, 'h1.section-title')
+
+    @property
+    def is_the_current_page(self):
+        Assert.true(re.match(self._page_title, self.selenium.title),
+                    "Expected page title to match: '%s'. Actual page title: '%s'" %
+                    (self._page_title, self.selenium.title))
+        return True
 
     @property
     def is_logged_in(self):
