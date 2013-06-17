@@ -17,7 +17,7 @@ class TagResultsPage(BasePage):
 
     @property
     def _page_title(self):
-        return u'Posts tagged “%s” | QMO – quality.(mozilla|allizom).org' % self.tag_name
+        return u'Posts tagged “%s” | QMO' % self.tag_name
 
     @property
     def results(self):

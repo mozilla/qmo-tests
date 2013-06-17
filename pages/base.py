@@ -18,9 +18,8 @@ class BasePage(Page):
 
     @property
     def is_the_current_page(self):
-        Assert.true(re.match(self._page_title, self.selenium.title),
-                    "Expected page title to match: '%s'. Actual page title: '%s'" %
-                    (self._page_title, self.selenium.title))
+        Assert.contains(self._page_title, self.selenium.title,
+                        'Expected page title does not match actual page title.')
         return True
 
     @property
