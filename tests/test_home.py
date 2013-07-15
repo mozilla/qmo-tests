@@ -85,6 +85,7 @@ class TestHomePage:
             Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
             Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
             home_page.paginator.click_next_page()
+            home_page.wait_for_ajax_to_finish()
 
         # Move 5 pages to the left
         for i in range(1, pages_to_test):
@@ -93,11 +94,13 @@ class TestHomePage:
             Assert.contains('This is\nPage %s of' % home_page.paginator.current_page_number, home_page.paginator.page_x_of_y_message)
             Assert.equal(home_page.paginator.page_number, home_page.paginator.current_page_number)
             home_page.paginator.click_prev_page()
+            home_page.wait_for_ajax_to_finish()
 
         # Click last page. "previous" is active, but "next" is not
         expected_page = home_page.paginator.total_page_number
 
         home_page.paginator.click_last_page()
+        home_page.wait_for_ajax_to_finish()
 
         Assert.true(home_page.paginator.is_prev_page_visible)
         Assert.false(home_page.paginator.is_next_page_visible)
@@ -107,6 +110,7 @@ class TestHomePage:
 
         # Click a middle page from the shown list
         home_page.paginator.click_middle_page()
+        home_page.wait_for_ajax_to_finish()
 
         Assert.true(home_page.paginator.is_next_page_visible)
         Assert.true(home_page.get_url_current_page().endswith('%s/' % home_page.paginator.page_number))

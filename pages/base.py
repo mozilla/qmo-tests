@@ -5,6 +5,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 from page import Page
 
@@ -30,3 +31,6 @@ class BasePage(Page):
     def header_region(self):
         from regions.header import HeaderRegion
         return HeaderRegion(self.testsetup)
+
+    def wait_for_ajax_to_finish(self):
+        WebDriverWait(self.selenium, self.timeout).until(lambda s: self.selenium.execute_script('return jQuery.active == 0'))
