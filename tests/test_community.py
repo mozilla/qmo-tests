@@ -11,6 +11,7 @@ from unittestzero import Assert
 from pages.home import HomePage
 from pages.community import CommunityPage
 from pages.link_crawler import LinkCrawler
+from pages.community import CommunityPageFeed
 
 
 class TestCommunityPage:
@@ -59,3 +60,18 @@ class TestCommunityPage:
         Assert.equal(
             0, len(bad_urls),
             u'%s bad links found. ' % len(bad_urls) + ', '.join(bad_urls))
+
+    @pytest.mark.nondestructive
+    @pytest.mark.skip_selenium
+    def test_that_verifies_rss_feed_for_community_page(self, mozwebqa):
+
+        feed = CommunityPageFeed(mozwebqa)
+
+        Assert.contains('QMO', feed.title)
+        Assert.equal(feed.description, u'Site Wide Activity Feed')
+        Assert.greater(feed.items_count, 10, 'where are all published articles?')
+
+        # now check length of content for all child elements of item element
+        for item in feed.items:
+            Assert.true(all(len(obj.text) > 10 for obj in item.findChildren()),
+                        'some content of "%s" item is missing or is too short' % item.title.text)
