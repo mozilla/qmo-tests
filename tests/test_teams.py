@@ -10,11 +10,12 @@ from unittestzero import Assert
 from pages.teams import TeamsPage
 
 TEAM_NAMES = [
-    u'Thunderbird',
     u'Automation',
     u'Desktop Firefox',
-    u'Browser Technologies',
-    u'Web QA']
+    u'Web QA',
+    u'Thunderbird',
+    u'Services QA'
+    u'Mobile QA']
 
 
 class TestTeamsPage:
