@@ -15,7 +15,7 @@ class AuthorPage(BasePage):
 
     @property
     def _page_title(self):
-        return u'Posts by %s | QMO \u2013 quality.mozilla.org' % self.author_name
+        return u'Posts by %s | QMO' % self.author_name
 
     def go_to_author_page(self):
         self.get_relative_path('/author/%s' % self.author_name)

@@ -27,9 +27,8 @@ class Page(object):
         if self._page_title:
             WebDriverWait(self.selenium, self.timeout).until(lambda s: s.title)
 
-        Assert.equal(
-            self.selenium.title, self._page_title,
-            'Expected page title: %s. Actual page title: %s' % (self._page_title, self.selenium.title))
+        Assert.contains(self._page_title, self.selenium.title,
+                        'Expected page title does not match actual page title.')
         return True
 
     def is_element_visible(self, *locator):
