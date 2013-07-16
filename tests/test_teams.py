@@ -14,7 +14,7 @@ TEAM_NAMES = [
     u'Desktop Firefox',
     u'Web QA',
     u'Thunderbird',
-    u'Services QA'
+    u'Services QA',
     u'Mobile QA']
 
 
