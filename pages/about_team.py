@@ -11,7 +11,7 @@ from pages.base import BasePage
 
 class AboutTeamPage(BasePage):
 
-    _team_name_locator = (By.CSS_SELECTOR, '.intro > h1')
+    _team_name_locator = (By.CSS_SELECTOR, '.entry-title')
 
     @property
     def _page_title(self):

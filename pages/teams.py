@@ -34,7 +34,7 @@ class TeamsPage(BasePage):
 
 class TeamRegion(PageRegion):
 
-    _team_avatar_locator = (By.CSS_SELECTOR, '.avatar')
+    _team_avatar_locator = (By.CSS_SELECTOR, '.attachment-team-icon-small')
     _team_title_locator = (By.CSS_SELECTOR, '.entry-title > a')
     _team_description_locator = (By.CSS_SELECTOR, '.team-info > p')
     _team_meta_block_locator = (By.CSS_SELECTOR, '.team-meta')
