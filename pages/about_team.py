@@ -15,7 +15,7 @@ class AboutTeamPage(BasePage):
 
     @property
     def _page_title(self):
-        return u'%s | Groups | QMO' % self.team
+        return u'%s | QMO' % self.team
 
     @property
     def team_name(self):

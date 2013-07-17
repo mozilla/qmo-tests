@@ -12,7 +12,7 @@ from base import BasePage
 
 class NotFoundPage(BasePage):
 
-    _page_title = u'Not Found | QMO'
+    _page_title = u'Page not found | QMO'
 
     _error_message_locator = (By.CSS_SELECTOR, '.entry-content')
 
