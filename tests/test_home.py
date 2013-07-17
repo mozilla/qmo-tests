@@ -46,19 +46,10 @@ class TestHomePage:
         not_found_page = NotFoundPage(mozwebqa)
         not_found_page.go_to_not_found_page()
 
-        Assert.equal(not_found_page.page_title, u'Sorry, we couldn’t find that')
+        Assert.contains(not_found_page.page_title, u'Sorry, we couldn’t find that')
 
         Assert.equal(not_found_page.get_page_status_code(), 404,
                      u'GET request to this page should return 404 status code')
-
-        err_msg_parts = []
-        err_msg_parts.append(u'We looked everywhere, but we couldn’t find the page or file you were looking for. A few possible explanations:')
-        err_msg_parts.append(u'You may have followed an out-dated link or bookmark.')
-        err_msg_parts.append(u'If you entered the address by hand, you might have mistyped it.')
-        err_msg_parts.append(u'Maybe you found a bug. Good work!')
-        error_message = '\n'.join(err_msg_parts)
-
-        Assert.equal(not_found_page.error_message, error_message)
 
     @pytest.mark.nondestructive
     def test_paginator(self, mozwebqa):
