@@ -11,7 +11,6 @@ from unittestzero import Assert
 from pages.home import HomePage
 from pages.community import CommunityPage
 from pages.link_crawler import LinkCrawler
-from pages.community import CommunityPageFeed
 
 
 class TestCommunityPage:
