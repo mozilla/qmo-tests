@@ -45,14 +45,21 @@ class LinkCrawler(Page):
         else:
             urls = (anchor['href'] for anchor in parsed_html.find(name, attrs=kwargs).find_all('a'))
 
+        # filter non HTTP/HTTPS urls
+        urls = self._filter_links(urls)
+
         # prepend base_url to relative links
         return map(lambda u: u if not u.startswith('/') else '%s%s' % (self.base_url, u), urls)
 
-    def verify_status_code_is_ok(self, url):
-        # exclude ftp urls as requests does not support them
-        if url.startswith('ftp://'):
-            return True
+    def _filter_links(self, urls):
+        filtered_urls = []
+        for url in urls:
+            if url.startswith('http') or url.startswith('/'):
+                filtered_urls.append(url)
 
+        return filtered_urls
+
+    def verify_status_code_is_ok(self, url):
         requests.adapters.DEFAULT_RETRIES = 5
         try:
             r = requests.get(url, verify=False, allow_redirects=True)
