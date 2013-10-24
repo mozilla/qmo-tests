@@ -27,13 +27,12 @@ class Paginator(Page):
 
     @property
     def total_page_number(self):
-        text = self.selenium.find_element(*self._total_page_number_locator).text
-        return int(text.split()[3])
+        return int(self.selenium.find_element(*self._total_page_number_locator).text)
 
     @property
     def current_page_number(self):
         text = self.selenium.find_element(*self._current_page_locator).text
-        return int(text.split()[3])
+        return int(text.split()[1])
 
     @property
     def page_x_of_y_message(self):
