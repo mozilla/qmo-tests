@@ -27,5 +27,5 @@ class TestRSSFeed:
 
         # check that items in feed have some content
         for item in feed.items:
-            Assert.true(all(len(item[key]) > 5 for key in item),
+            Assert.true(all(len(item[key]) >= 5 for key in item),
                         u'some content of "%s" item is missing or is too short' % item['title'])
