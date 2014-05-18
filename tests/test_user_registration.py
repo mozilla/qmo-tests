@@ -14,7 +14,7 @@ from pages.home import HomePage
 
 class TestUserRegistration:
 
-    @pytest.mark.xfail(reason=u'There is a captcha on the registration page')
+    @pytest.mark.xfail(reason=u'There is a captcha on the registration page.')
     def test_new_user_can_register(self, mozwebqa):
         home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
@@ -36,4 +36,4 @@ class TestUserRegistration:
         registration_pg.submit_registration()
         Assert.equal(
             registration_pg.username_error,
-            u'Only lowercase letters and numbers allowed')
+            u'Only lowercase letters and numbers allowed.')
