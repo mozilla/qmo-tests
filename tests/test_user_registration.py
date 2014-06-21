@@ -14,7 +14,7 @@ from pages.home import HomePage
 
 class TestUserRegistration:
 
-    @pytest.mark.xfail(reason=u'There is a capcha on the registration page')
+    @pytest.mark.xfail(reason=u'QMO has removed registration')
     def test_new_user_can_register(self, mozwebqa):
         home_pg = HomePage(mozwebqa)
         home_pg.go_to_home_page()
