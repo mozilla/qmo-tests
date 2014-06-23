@@ -15,7 +15,8 @@ TEAM_NAMES = [
     u'Web QA',
     u'Thunderbird',
     u'Services QA',
-    u'Mobile QA']
+    u'Mobile QA',
+    u'Firefox OS QA']
 
 
 class TestTeamsPage:
