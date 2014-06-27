@@ -48,7 +48,7 @@ class TestCommunityPage:
         bad_urls = []
 
         Assert.greater(
-            len(urls), 0, u'something went wrong. no links found.')
+            len(urls), 0, u'Something went wrong. No links found.')
 
         for url in urls:
             if not 'irc://irc.mozilla.org' and not 'mailto:' in url:

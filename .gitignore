@@ -4,3 +4,4 @@
 *.komodoproject
 results*
 tests/build
+build/*
