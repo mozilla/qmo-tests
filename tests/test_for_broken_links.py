@@ -30,6 +30,7 @@ class TestLinksReturnGoodStatusCode:
             0, len(bad_urls),
             u'%s bad links found. ' % len(bad_urls) + ', '.join(bad_urls))
 
+    @pytest.mark.xfail(reason = 'Bug 1028898 - Links to QMO videos are returning error page')
     @pytest.mark.nondestructive
     def test_media_page_links(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
