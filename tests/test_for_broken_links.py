@@ -19,7 +19,7 @@ class TestLinksReturnGoodStatusCode:
         urls = crawler.collect_links('/docs', id='content')
         bad_urls = []
 
-        Assert.greater(len(urls), 0, u'something went wrong. no links found.')
+        Assert.greater(len(urls), 0, u'Something went wrong. No links found.')
 
         for url in urls:
             check_result = crawler.verify_status_code_is_ok(url)
@@ -37,7 +37,7 @@ class TestLinksReturnGoodStatusCode:
         urls = crawler.collect_links('/media', id='content-main')
         bad_urls = []
 
-        Assert.greater(len(urls), 0, u'something went wrong. no links found.')
+        Assert.greater(len(urls), 0, u'Something went wrong. No links found.')
 
         for url in urls:
             check_result = crawler.verify_status_code_is_ok(url)

@@ -26,7 +26,7 @@ class TestHomePage:
 
         Assert.equal(
             r.status_code, 200,
-            u'request to %s responded with %s status code' % (favicon_url, r.status_code))
+            u'Request to %s responded with %s status code.' % (favicon_url, r.status_code))
 
     @pytest.mark.skip_selenium
     @pytest.mark.nondestructive
@@ -38,7 +38,7 @@ class TestHomePage:
 
         Assert.equal(
             r.status_code, 200,
-            u'request to %s responded with %s status code' % (robots_url, r.status_code))
+            u'Request to %s responded with %s status code.' % (robots_url, r.status_code))
 
     @pytest.mark.nondestructive
     def test_that_proper_404_error_page_displayed(self, mozwebqa):
@@ -46,10 +46,10 @@ class TestHomePage:
         not_found_page = NotFoundPage(mozwebqa)
         not_found_page.go_to_not_found_page()
 
-        Assert.contains(not_found_page.page_title, u'Sorry, we couldn’t find that')
+        Assert.contains(not_found_page.page_title, u'Sorry, we couldn’t find that.')
 
         Assert.equal(not_found_page.get_page_status_code(), 404,
-                     u'GET request to this page should return 404 status code')
+                     u'GET request to this page should return 404 status code.')
 
     @pytest.mark.nondestructive
     def test_paginator(self, mozwebqa):
@@ -115,7 +115,7 @@ class TestHomePage:
         urls = crawler.collect_links('/', id='content')
         bad_urls = []
 
-        Assert.greater(len(urls), 0, u'something went wrong. no links found.')
+        Assert.greater(len(urls), 0, u'Something went wrong. No links found.')
 
         for url in urls:
             check_result = crawler.verify_status_code_is_ok(url)

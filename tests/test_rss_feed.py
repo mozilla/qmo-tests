@@ -23,9 +23,9 @@ class TestRSSFeed:
         Assert.equal(feed.title, u'QMO - quality.mozilla.org')
         Assert.equal(feed.description, u'The Home of Mozilla QA')
         Assert.equal(feed.link, mozwebqa.base_url)
-        Assert.greater_equal(feed.items_count, 10, 'where are all published articles?')
+        Assert.greater_equal(feed.items_count, 10, 'Where are all published articles?')
 
         # check that items in feed have some content
         for item in feed.items:
             Assert.true(all(len(item[key]) >= 5 for key in item),
-                        u'some content of "%s" item is missing or is too short' % item['title'])
+                        u'Some content of "%s" item is missing or is too short.' % item['title'])

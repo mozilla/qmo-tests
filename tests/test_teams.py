@@ -31,11 +31,11 @@ class TestTeamsPage:
         Assert.equal(
             sorted(TEAM_NAMES),
             sorted([team.name for team in listed_teams]),
-            u'Not all expected teams are present')
+            u'Not all expected teams are present.')
 
         # check for avatar, description and meta info
         for team in listed_teams:
-            Assert.true(team.is_avatar_displayed, u'Team avatar is not displayed')
+            Assert.true(team.is_avatar_displayed, u'Team avatar is not displayed.')
             #Assert.greater(len(team.description), 0, u'Team description is blank')
             #Assert.greater(len(team.meta_info), 0, u'Team meta info is blank')
 

@@ -36,4 +36,4 @@ class TestUserRegistration:
         registration_pg.submit_registration()
         Assert.equal(
             registration_pg.username_error,
-            u'Only lowercase letters and numbers allowed')
+            u'Only lowercase letters and numbers allowed.')
