@@ -13,8 +13,7 @@ class HeaderRegion(Page):
 
     _community_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(3) a')
     _events_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(4) a')
-    _media_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(5) a')
-    _docs_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(6) a')
+    _docs_link_locator = (By.CSS_SELECTOR, '#nav-main li:nth-child(5) a')
     _search_button_locator = (By.CSS_SELECTOR, '#search button')
     _search_field_locator = (By.CSS_SELECTOR, '#search input#s')
 
@@ -27,11 +26,6 @@ class HeaderRegion(Page):
         self.find_element(*self._events_link_locator).click()
         from pages.events import EventsPage
         return EventsPage(self.testsetup)
-
-    def click_media_link(self):
-        self.find_element(*self._media_link_locator).click()
-        from pages.media import MediaPage
-        return MediaPage(self.testsetup)
 
     def click_docs_link(self):
         self.find_element(*self._docs_link_locator).click()
