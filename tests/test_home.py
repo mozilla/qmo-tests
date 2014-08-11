@@ -52,6 +52,7 @@ class TestHomePage:
                      u'GET request to this page should return 404 status code.')
 
     @pytest.mark.nondestructive
+    @pytest.mark.xfail(reason='Bug 1050750 - Click on the last page number returns 404 Page not found')
     def test_paginator(self, mozwebqa):
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
@@ -110,6 +111,7 @@ class TestHomePage:
 
     @pytest.mark.skip_selenium
     @pytest.mark.nondestructive
+    @pytest.mark.xfail(reason='Bug 1050750 - Click on the last page number returns 404 Page not found')
     def test_home_page_links(self, mozwebqa):
         crawler = LinkCrawler(mozwebqa)
         urls = crawler.collect_links('/', id='content')
