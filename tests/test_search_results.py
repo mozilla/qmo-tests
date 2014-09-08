@@ -29,6 +29,6 @@ class TestSearchPage:
         home_page.header_region.type_in_search_field(u'job board')
         search_results_page = home_page.header_region.click_search_button()
 
-        expected_text = u'Search results'
+        expected_text = u'Search Results'
         Assert.contains(expected_text, search_results_page._page_title)
         Assert.greater(len(search_results_page.results), 0)
