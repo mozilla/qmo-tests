@@ -11,7 +11,7 @@ from base import BasePage
 
 class SearchResultsPage(BasePage):
 
-    _page_title = u'Search results'
+    _page_title = u'Search Results'
 
     _search_text_locator = (By.ID, 'content-main')
     _search_result_item_locator = (By.CSS_SELECTOR, "#content-main > article")

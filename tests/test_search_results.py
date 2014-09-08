@@ -17,9 +17,9 @@ class TestSearchPage:
         home_page = HomePage(mozwebqa)
         home_page.go_to_home_page()
 
-        home_page.header_region.click_search_button()
-        Assert.true(home_page.is_the_current_page)
-        Assert.true(home_page.get_url_current_page().endswith(u'/?s='))
+        search_results = home_page.header_region.click_search_button()
+        Assert.true(search_results.is_the_current_page)
+        Assert.true(search_results.get_url_current_page().endswith(u'/?s='))
 
     @pytest.mark.nondestructive
     def test_search_results_returned(self, mozwebqa):
