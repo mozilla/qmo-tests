@@ -10,7 +10,7 @@ from unittestzero import Assert
 from pages.teams import TeamsPage
 
 TEAM_NAMES = [
-    u'Desktop Firefox',
+    u'Firefox QE',
     u'Web QA',
     u'Cloud Services QA',
     u'Mobile QA',
