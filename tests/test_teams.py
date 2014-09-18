@@ -14,6 +14,7 @@ TEAM_NAMES = [
     u'Web QA',
     u'Cloud Services QA',
     u'Mobile QA',
+    u'Platform',
     u'Firefox OS QA']
 
 
