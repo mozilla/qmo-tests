@@ -1,7 +1,0 @@
-*.swp
-*.pyc
-*.tmproj
-*.komodoproject
-results*
-tests/build
-build/*
